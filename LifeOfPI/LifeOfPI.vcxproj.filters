@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\GameStateManager">
+      <UniqueIdentifier>{d2b4fe2a-dc8d-42c0-9870-753f17b9d981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{807407b7-7514-4f5a-aa93-788ef1518e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Activities">
+      <UniqueIdentifier>{bcb9512d-daf7-46ee-a0b9-7a9222df70c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{aeca79c9-1491-40dd-83f0-43cab566ee60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{fa971bdc-4fae-4feb-a33f-dfe9c8d30886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{66dc2113-dbd0-437e-a204-0d8581dfb60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameStateManager">
+      <UniqueIdentifier>{61a34bff-a28f-4d55-96d6-896dd1b3dc5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Activities">
+      <UniqueIdentifier>{109d7a1c-ac43-446e-9b64-96b662d201e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{990c0869-63ab-4400-a1d2-6b1f801ac5fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{5147ef72-467e-4c7b-8843-4db176de2a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{4f5ca82d-6c18-4f2a-89b6-f3838d80837f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{bb73c626-daaa-4551-9d32-73aee2b19936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Behaviours">
+      <UniqueIdentifier>{e0b93568-da97-4db2-b9eb-c5039207da3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Behaviours">
+      <UniqueIdentifier>{24b74bc9-3a60-4c92-9d22-f997d2b09c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects">
+      <UniqueIdentifier>{1c65f61d-01d8-4654-a7b0-f4f18a987a22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects">
+      <UniqueIdentifier>{f164d736-235b-43f6-981e-eb6904b946e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects\Phone">
+      <UniqueIdentifier>{a8a62908-9bd8-4fa9-a62c-e2ab86129cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects\Phone">
+      <UniqueIdentifier>{64653a0d-2399-4de3-8c9d-9955e7f49c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects\GUI">
+      <UniqueIdentifier>{ff438a2a-9d05-4ea5-a86a-741c1e5ce5e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects\GUI">
+      <UniqueIdentifier>{8f8aef49-7c63-4e3d-b00d-c70d1d861c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects\Levels">
+      <UniqueIdentifier>{af77fe5c-3f06-4e46-9f05-c2abf5cd3574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects\Levels">
+      <UniqueIdentifier>{ba1045b6-0d45-4178-ae19-6ab1e85928fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States\Lectures">
+      <UniqueIdentifier>{936115db-2f96-4476-a729-199a9c2821cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States\Lectures">
+      <UniqueIdentifier>{381ef7ce-599a-4923-b564-18a543677c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects\Levels\Lecturers">
+      <UniqueIdentifier>{bf4e7d33-b0d2-4125-a442-5cb6a7118e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects\Levels\Lecturers">
+      <UniqueIdentifier>{10399ac0-765c-484e-b571-b2d75acecd6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects\GUI\Text">
+      <UniqueIdentifier>{03644b5c-387e-4821-ad16-b02a6bbe8c80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects\GUI\Text">
+      <UniqueIdentifier>{a66080ee-eb21-4f43-977c-11439b5b30a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LifeOfPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainActivity.cpp">
+      <Filter>Source Files\Activities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameHelper.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files\GameStateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeOfPIGame.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\GameObjects\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviour.cpp">
+      <Filter>Source Files\GameObjects\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="Blink.cpp">
+      <Filter>Source Files\GameObjects\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>Source Files\GameObjects\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="Phone.cpp">
+      <Filter>Source Files\GameObjects\Objects\Phone</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\GameObjects\Objects\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuPhone.cpp">
+      <Filter>Source Files\GameObjects\Objects\Phone</Filter>
+    </ClCompile>
+    <ClCompile Include="Toggle.cpp">
+      <Filter>Source Files\GameObjects\Objects\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicSettings.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Achievements.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Achievement.cpp">
+      <Filter>Source Files\GameObjects\Objects\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="StateFader.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Question.cpp">
+      <Filter>Source Files\GameObjects\Objects\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Answer.cpp">
+      <Filter>Source Files\GameObjects\Objects\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Quiz.cpp">
+      <Filter>Source Files\GameObjects\Objects\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="CounterBar.cpp">
+      <Filter>Source Files\GameObjects\Objects\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="QuizQuestionData.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="HighMath.cpp">
+      <Filter>Source Files\States\Lectures</Filter>
+    </ClCompile>
+    <ClCompile Include="Lecture.cpp">
+      <Filter>Source Files\States\Lectures</Filter>
+    </ClCompile>
+    <ClCompile Include="Lecturer.cpp">
+      <Filter>Source Files\GameObjects\Objects\Levels\Lecturers</Filter>
+    </ClCompile>
+    <ClCompile Include="Litvinog.cpp">
+      <Filter>Source Files\GameObjects\Objects\Levels\Lecturers</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\GameObjects\Objects\GUI\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="TextInfo.cpp">
+      <Filter>Source Files\GameObjects\Objects\GUI\Text</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LifeOfPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header Files\GameStateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Activity.h">
+      <Filter>Header Files\Activities</Filter>
+    </ClInclude>
+    <ClInclude Include="MainActivity.h">
+      <Filter>Header Files\Activities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHelper.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeOfPIGame.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\GameObjects\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour.h">
+      <Filter>Header Files\GameObjects\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="Blink.h">
+      <Filter>Header Files\GameObjects\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>Header Files\GameObjects\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="Phone.h">
+      <Filter>Header Files\GameObjects\Objects\Phone</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\GameObjects\Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPhone.h">
+      <Filter>Header Files\GameObjects\Objects\Phone</Filter>
+    </ClInclude>
+    <ClInclude Include="Toggle.h">
+      <Filter>Header Files\GameObjects\Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicSettings.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Achievements.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Achievement.h">
+      <Filter>Header Files\GameObjects\Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="StateFader.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Question.h">
+      <Filter>Header Files\GameObjects\Objects\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Answer.h">
+      <Filter>Header Files\GameObjects\Objects\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Quiz.h">
+      <Filter>Header Files\GameObjects\Objects\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="CounterBar.h">
+      <Filter>Header Files\GameObjects\Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="QuizQuestionData.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="HighMath.h">
+      <Filter>Header Files\States\Lectures</Filter>
+    </ClInclude>
+    <ClInclude Include="Lecture.h">
+      <Filter>Header Files\States\Lectures</Filter>
+    </ClInclude>
+    <ClInclude Include="Lecturer.h">
+      <Filter>Header Files\GameObjects\Objects\Levels\Lecturers</Filter>
+    </ClInclude>
+    <ClInclude Include="Litvinog.h">
+      <Filter>Header Files\GameObjects\Objects\Levels\Lecturers</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\GameObjects\Objects\GUI\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="TextInfo.h">
+      <Filter>Header Files\GameObjects\Objects\GUI\Text</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
