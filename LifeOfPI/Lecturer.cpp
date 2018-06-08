@@ -1,6 +1,6 @@
 #include "Lecturer.h"
 
-Lecturer::Lecturer(sf::Image &sheet, int sceneLeftX, int sceneRightX) :
+Lecturer::Lecturer(sf::Image &sheet, int sceneLeftX, int sceneRightX, sf::Font *font) :
 	GameObject(sheet, 1, 5, sf::IntRect(0, 0, 32, 38))
 {
 	_idleAnimation = _currentAnimation;
@@ -20,6 +20,19 @@ Lecturer::Lecturer(sf::Image &sheet, int sceneLeftX, int sceneRightX) :
 	_sceneRightX = sceneRightX - this->getSize().x;
 
 	_moveSpeed = 0.02;
+
+	_textDuration = 0;
+	TextInfo textinfo;
+	textinfo.horizontalAlign = TextInfo::eHorizontalAlign::Middle;
+	textinfo.verticalAlign = TextInfo::eVerticalAlign::Bottom;
+	textinfo.font = font;
+	textinfo.characterSize = 5;
+	textinfo.backgroundColor = sf::Color::Transparent;
+	sf::FloatRect rect = this->getGlobalBounds();
+	_lecturerText.setTextInfo(textinfo).setPosition(
+		sf::Vector2f((int)(rect.left + rect.width / 2), (int)(rect.top))
+	);
+
 } // constructor
 
 Lecturer::~Lecturer()
@@ -29,6 +42,14 @@ Lecturer::~Lecturer()
 	delete _activeAnimation;
 	delete _questionAnimation;
 } // destructor
+
+Lecturer& Lecturer::say(sf::String text, float duration)
+{
+	_lecturerText = text;
+	_textDuration = duration;
+
+	return *this;
+} // say something
 
 Lecturer& Lecturer::setMinTime(int minTime)
 {
@@ -123,8 +144,13 @@ float Lecturer::getMoveSpeed()
 
 Lecturer& Lecturer::setPosition(const sf::Vector2f &position)
 {
-	GameObject::setPosition(position);
+	GameObject::setPosition(sf::Vector2f(sf::Vector2i(position)));
 	_position = position;
+
+	sf::FloatRect rect = this->getGlobalBounds();
+	_lecturerText.setPosition(
+		sf::Vector2f((int)(rect.left + rect.width / 2), (int)(rect.top))
+	);
 
 	return *this;
 } // setting position
@@ -157,6 +183,8 @@ Lecturer& Lecturer::update(float dt)
 	GameObject::update(dt);
 
 	_timeLeft -= dt;
+	if (_textDuration > 0)
+		_textDuration -= dt;
 
 	switch (_lecturerState)
 	{
@@ -172,6 +200,16 @@ Lecturer& Lecturer::update(float dt)
 
 	return *this;
 } // update
+
+Lecturer& Lecturer::render(sf::RenderTarget &target)
+{
+	GameObject::render(target);
+
+	if (isVisible && _textDuration > 0)
+		_lecturerText.render(target);
+
+	return *this;
+} // rendering
 
 Lecturer& Lecturer::idleUpdate()
 {

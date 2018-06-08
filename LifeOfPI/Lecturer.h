@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Text.h"
 
 class Lecturer : public GameObject
 {
@@ -9,6 +10,9 @@ protected:
 	Animation *_idleAnimation;
 	Animation *_activeAnimation;
 	Animation *_questionAnimation;
+
+	Text _lecturerText;
+	float _textDuration;
 
 	int _lecturerState;
 
@@ -37,8 +41,10 @@ public:
 		Question = 3
 	};
 
-	Lecturer(sf::Image &sheet, int sceneLeftX, int sceneRightX);
+	Lecturer(sf::Image &sheet, int sceneLeftX, int sceneRightX, sf::Font *font);
 	virtual ~Lecturer();
+
+	virtual Lecturer& say(sf::String text, float duration);
 
 	virtual Lecturer& setMinTime(int minTime);
 	virtual Lecturer& setMaxTime(int maxTime);
@@ -58,5 +64,6 @@ public:
 	virtual int getState();
 
 	virtual Lecturer& update(float dt);
+	virtual Lecturer& render(sf::RenderTarget &target);
 
 };

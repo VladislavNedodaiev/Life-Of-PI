@@ -37,6 +37,7 @@ protected:
 
 	sf::Music _backgroundMusic;
 
+	// Quizing
 	int _easyCount;
 	int _mediumCount;
 	int _hardCount;

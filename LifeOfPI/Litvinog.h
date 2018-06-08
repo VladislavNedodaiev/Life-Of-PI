@@ -6,13 +6,7 @@ class Litvinog : public Lecturer
 {
 public:
 
-	Litvinog(sf::Image &sheet, int sceneLeftX, int sceneRightX);
+	Litvinog(sf::Image &sheet, int sceneLeftX, int sceneRightX, sf::Font *font);
 	virtual ~Litvinog();
-
-	virtual Litvinog& setPosition(const sf::Vector2f &position);
-	virtual Litvinog& setPosition(float x, float y);
-
-	virtual Litvinog& move(const sf::Vector2f &offset);
-	virtual Litvinog& move(float offsetX, float offsetY);
 
 };

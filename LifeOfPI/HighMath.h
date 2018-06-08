@@ -8,7 +8,6 @@ class HighMath : public Lecture
 protected:
 
 	Litvinog *_litvinog;
-	Text text;
 
 	sf::SoundBuffer _handwriteBuffer;
 	sf::Sound _handwrite;

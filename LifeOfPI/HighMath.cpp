@@ -12,15 +12,6 @@ HighMath::~HighMath()
 
 HighMath& HighMath::initialize()
 {
-	TextInfo textinfo;
-	textinfo.horizontalAlign = TextInfo::eHorizontalAlign::Middle;
-	textinfo.verticalAlign = TextInfo::eVerticalAlign::Top;
-	textinfo.font = &_gameHelper->font;
-	textinfo.characterSize = 5;
-	textinfo.backgroundColor = sf::Color::Transparent;
-	text.setTextInfo(textinfo);
-	//text = sf::String(L"ÓÂÀÃÀ ÑÒÓÄÅÍÒÈ, ÓÂÀÃÀ!");
-	text.setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX / 2, _gameHelper->settings.VIEW_SIZEY / 2));
 
 	_currentQuiz = 0;
 	_easyCount = 2;
@@ -37,7 +28,8 @@ HighMath& HighMath::initialize()
 	_background = new GameObject(_backgroundSheet.getSheet());
 	_foreground = new GameObject(_foregroundSheet.getSheet());
 	_foreground->setPosition(0, _gameHelper->settings.VIEW_SIZEY - _foreground->getSize().y);
-	_litvinog = new Litvinog(_lecturerSheet.getSheet(), 32, 163);
+	_litvinog = new Litvinog(_lecturerSheet.getSheet(), 32, 163, &_gameHelper->font);
+	_litvinog->say(L"FUCK THIS", 20);
 
 	return *this;
 } // initialize
@@ -249,12 +241,6 @@ HighMath& HighMath::update(float dt)
 		{
 			_litvinog->setState(Lecturer::eLecturerState::Idle);
 			startWait();
-			/*_quizCurrentCount++;
-			if (_quizCurrentCount > 2)
-			{
-				toDelete = true;
-				printf("%f", _gameHelper->getTotal());
-			}*/
 		} // else if
 	} // if
 	if (_litvinog != nullptr)
@@ -275,8 +261,6 @@ HighMath& HighMath::render()
 
 	if (_quiz != nullptr)
 		_quiz->render(_gameHelper->renderWindow);
-
-	//text.render(_gameHelper->renderWindow);
 
 	return *this;
 } // rendering
