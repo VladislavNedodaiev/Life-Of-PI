@@ -145,8 +145,8 @@ bool Answer::isPressed(sf::Event &event, sf::Vector2i &point)
 Answer& Answer::reset()
 {
 	_currentAnimation = _notPressed;
-	_currentAnimation->updateTexture();
 	_currentAnimation->setFrame(0);
+	_currentAnimation->updateTexture();
 	isCorrect = false;
 
 	return *this;
