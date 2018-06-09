@@ -7,8 +7,6 @@ class HighMath : public Lecture
 {
 protected:
 
-	Litvinog *_litvinog;
-
 	sf::SoundBuffer _handwriteBuffer;
 	sf::Sound _handwrite;
 
@@ -20,22 +18,14 @@ protected:
 	virtual HighMath& loadCorrectAnswers();
 	virtual HighMath& loadIncorrectAnswers();
 	virtual HighMath& loadTimelimitExceeded();
+	virtual HighMath& loadFinalWords();
 
-	virtual HighMath& generateQuiz();
 	virtual HighMath& generateEasy();
 	virtual HighMath& generateMedium();
 	virtual HighMath& generateHard();
-	virtual HighMath& generateInsane();
-	virtual HighMath& startWait();
 
 public:
 
 	HighMath(GameHelper &gameHelper);
 	virtual ~HighMath();
-
-	virtual State& input();
-
-	virtual HighMath& update(float dt);
-
-	virtual HighMath& render();
 };

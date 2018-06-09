@@ -29,26 +29,35 @@ protected:
 
 	Quiz *_quiz;
 	QuizQuestionData _quizData;
+	Lecturer *_lecturer;
+	Text _timer;
 
 	std::vector <sf::String> _speakings;
 	std::vector <sf::String> _correctAnswers;
 	std::vector <sf::String> _incorrectAnswers;
 	std::vector <sf::String> _timelimitExceeded;
+	std::vector <sf::String> _finalWords;
 
 	sf::Music _backgroundMusic;
 
 	// Quizing
+	enum eQuizType
+	{
+		Easy = 0,
+		Medium = 1,
+		Hard = 2
+	};
+	eQuizType _quizType;
+
+	float _lectureTime;
+	float _timePassed;
 	int _easyCount;
 	int _mediumCount;
 	int _hardCount;
-	int _insaneCount;
-	int _currentQuiz;
 	int _quizCount;
 
-	int _minWait;
-	int _maxWait;
 	float _wait;
-	virtual Lecture& startWait();
+	bool _endLecture;
 
 	virtual Lecture& initialize();
 	virtual Lecture& loadContent();
@@ -58,12 +67,14 @@ protected:
 	virtual Lecture& loadCorrectAnswers() = 0;
 	virtual Lecture& loadIncorrectAnswers() = 0;
 	virtual Lecture& loadTimelimitExceeded() = 0;
+	virtual Lecture& loadFinalWords() = 0;
 
-	virtual Lecture& generateQuiz() = 0;
+	virtual Lecture& generateWait();
+	virtual Lecture& generateQuiz();
 	virtual Lecture& generateEasy() = 0;
 	virtual Lecture& generateMedium() = 0;
 	virtual Lecture& generateHard() = 0;
-	virtual Lecture& generateInsane() = 0;
+	virtual double generateTotal();
 
 	enum eLectureState
 	{
@@ -77,4 +88,9 @@ public:
 	Lecture(GameHelper &gameHelper);
 	virtual ~Lecture();
 
+	virtual Lecture& input();
+
+	virtual Lecture& update(float dt);
+
+	virtual Lecture& render();
 };

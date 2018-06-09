@@ -12,14 +12,6 @@ HighMath::~HighMath()
 
 HighMath& HighMath::initialize()
 {
-
-	_currentQuiz = 0;
-	_easyCount = 2;
-	_mediumCount = 1;
-	_hardCount = 1;
-	_insaneCount = 1;
-	_quizCount = _easyCount + _mediumCount + _hardCount + _insaneCount;
-
 	_handwrite.setBuffer(_handwriteBuffer);
 	_handwrite.setLoop(true);
 	if (_gameHelper->settings.sounds)
@@ -28,8 +20,7 @@ HighMath& HighMath::initialize()
 	_background = new GameObject(_backgroundSheet.getSheet());
 	_foreground = new GameObject(_foregroundSheet.getSheet());
 	_foreground->setPosition(0, _gameHelper->settings.VIEW_SIZEY - _foreground->getSize().y);
-	_litvinog = new Litvinog(_lecturerSheet.getSheet(), 32, 163, &_gameHelper->font);
-	_litvinog->say(L"FUCK THIS", 20);
+	_lecturer = new Litvinog(_lecturerSheet.getSheet(), 32, 163, &_gameHelper->font);
 
 	return *this;
 } // initialize
@@ -49,7 +40,6 @@ HighMath& HighMath::loadContent()
 
 HighMath& HighMath::unloadContent()
 {
-	delete _litvinog;
 	_handwrite.stop();
 
 	return *this;
@@ -119,28 +109,21 @@ HighMath& HighMath::loadTimelimitExceeded()
 	return *this;
 } // loading timelimitexceeded
 
-HighMath& HighMath::generateQuiz()
+HighMath& HighMath::loadFinalWords()
 {
-	if (_quiz == nullptr)
-		return *this;
+	std::wstring string;
+	std::wifstream ifstream("Data/Levels/HighMath/FinalWords.dat");
 
-	_quizData.clear();
+	while (ifstream.is_open() && !ifstream.eof())
+	{
+		std::getline(ifstream, string);
+		_finalWords.push_back(sf::String(string));
+	} // while
 
-	_litvinog->setState(Lecturer::eLecturerState::Question);
-
-	generateEasy();
-
-	if (_correctAnswers.size() > 0)
-		_quizData.reactionOnCorrect = _correctAnswers[std::rand() % _correctAnswers.size()];
-	if (_incorrectAnswers.size() > 0)
-		_quizData.reactionOnIncorrect = _incorrectAnswers[std::rand() % _incorrectAnswers.size()];
-	if (_timelimitExceeded.size() > 0)
-		_quizData.reactionOnTimelimit = _timelimitExceeded[std::rand() % _timelimitExceeded.size()];
-
-	_quiz->start(_quizData);
+	ifstream.close();
 
 	return *this;
-} // input
+} // load final words
 
 HighMath& HighMath::generateEasy()
 {
@@ -190,77 +173,10 @@ HighMath& HighMath::generateEasy()
 
 HighMath& HighMath::generateMedium()
 {
-
 	return *this;
 } // generate easy
+
 HighMath& HighMath::generateHard()
 {
-
 	return *this;
 } // generate easy
-HighMath& HighMath::generateInsane()
-{
-
-	return *this;
-} // generate easy
-HighMath& HighMath::startWait()
-{
-	_wait = std::rand() % 10 + 5;
-
-	return *this;
-} // start waiting (wait = rand)
-
-State& HighMath::input()
-{
-	sf::Vector2i mousePos = sf::Vector2i(_gameHelper->renderWindow.mapPixelToCoords(sf::Mouse::getPosition(_gameHelper->renderWindow)));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		toDelete = true;
-	if (_quiz != nullptr)
-	{
-		int inp = _quiz->input(_gameHelper->event, mousePos);
-		if (inp == Quiz::eInput::Correct)
-			_gameHelper->addMarkToTotal(100);
-		else if (inp == Quiz::eInput::Incorrect)
-			_gameHelper->addMarkToTotal(0);
-	} // if
-
-	return *this;
-} // input
-
-HighMath& HighMath::update(float dt)
-{
-	if (_quiz != nullptr)
-	{
-		if (_quiz->getQuizState() == Quiz::eQuizState::None)
-		{
-			_wait -= dt;
-			if (_wait < 0)
-				generateQuiz();
-		} // if
-		else if (_quiz->update(dt) == Quiz::eUpdateResult::Closed)
-		{
-			_litvinog->setState(Lecturer::eLecturerState::Idle);
-			startWait();
-		} // else if
-	} // if
-	if (_litvinog != nullptr)
-		_litvinog->update(dt);
-	return *this;
-} // update
-
-HighMath& HighMath::render()
-{
-	if (_background != nullptr)
-		_background->render(_gameHelper->renderWindow);
-
-	if (_litvinog != nullptr)
-		_litvinog->render(_gameHelper->renderWindow);
-
-	if (_foreground != nullptr)
-		_foreground->render(_gameHelper->renderWindow);
-
-	if (_quiz != nullptr)
-		_quiz->render(_gameHelper->renderWindow);
-
-	return *this;
-} // rendering
