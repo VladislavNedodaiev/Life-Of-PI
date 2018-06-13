@@ -160,7 +160,7 @@ HighMath& HighMath::generateEasy()
 		break;
 	} // operations
 
-	_quizData.duration = 8;
+	_quizData.duration = 8 - _easyCount;
 	_quizData.waitDuration = 3;
 
 	_quizData.question = L"Порахуйте " + std::to_wstring(x) + operation + std::to_wstring(y) + L" = ?";

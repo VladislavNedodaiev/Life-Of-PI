@@ -24,12 +24,13 @@ Lecture& Lecture::initialize()
 	_endLecture = false;
 
 	TextInfo textinfo;
-	textinfo.horizontalAlign = TextInfo::eHorizontalAlign::Right;
+	textinfo.horizontalAlign = TextInfo::eHorizontalAlign::Left;
 	textinfo.verticalAlign = TextInfo::eVerticalAlign::Top;
 	textinfo.font = &_gameHelper->font;
 	textinfo.characterSize = 5;
 	textinfo.backgroundColor = sf::Color::Transparent;
-	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX, 0));
+	//_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX, 0));
+	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(0, 0));
 
 	_lectureState = eLectureState::None;
 
@@ -78,13 +79,13 @@ Lecture& Lecture::generateWait()
 	switch (icase)
 	{
 	default:
-		if ((int)(_timePassed + 5.0) / _lectureTime * 3.0 != icase)
+		if ((int)((_timePassed + 5.0) / _lectureTime * 3.0) != icase)
 			_wait = _lectureTime * 3.0 - _timePassed;
 		else _wait = 5.0;
 		break;
 	case 1:
-		if ((int)(_timePassed + 5.0) / _lectureTime * 3.0 != icase)
-			_wait = _lectureTime * 3.0 - _timePassed;
+		if ((int)((_timePassed + 5.0) / _lectureTime * 3.0) != icase)
+			_wait = _lectureTime / 3.0 * 2.0 - _timePassed;
 		else _wait = 3.0;
 		break;
 	case 2:
@@ -169,27 +170,32 @@ Lecture& Lecture::update(float dt)
 	//
 	// timer
 	//
-	sf::String tm = L"";
-	
-	int minutes = (_lectureTime - _timePassed) / 60.0;
-	if (minutes < 0)
-		minutes = 0;
-	double seconds = (_lectureTime - _timePassed) - minutes * 60;
-	if (seconds < 0)
-		seconds = 0;
+	if ((int)(_timePassed + dt) != (int)_timePassed)
+	{
+		std::string tm = "";
 
-	if (minutes < 10)
-		tm += L"0";
-	else if (minutes < 1)
-		tm += L"0";
-	else tm += std::to_wstring(minutes);
-	tm += ":";
+		int minutes = (_lectureTime - _timePassed) / 60.0;
+		if (minutes < 0)
+			minutes = 0;
+		double seconds = (_lectureTime - _timePassed) - minutes * 60;
+		if (seconds < 0)
+			seconds = 0;
 
-	if ((int)seconds < 10)
-		tm += L"0";
-	else if ((int)seconds < 1)
-		tm += L"0";
-	else tm += std::to_wstring((int)seconds);
+		if (minutes < 10)
+			tm += "0";
+		if (minutes < 1)
+			tm += "0";
+		else tm += std::to_string(minutes);
+		tm += ":";
+
+		if ((int)seconds < 10)
+			tm += "0";
+		if ((int)seconds < 1)
+			tm += "0";
+		else tm += std::to_string((int)seconds);
+
+		_timer = sf::String(tm);
+	} // if
 
 	// update
 	_timePassed += dt;
