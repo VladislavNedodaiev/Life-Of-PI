@@ -51,10 +51,18 @@ protected:
 
 	float _lectureTime;
 	float _timePassed;
+
 	int _easyCount;
+	int _easyCorrect;
+	float _easyMarkPercentage; // how much of mark is for this type of questions
+
 	int _mediumCount;
+	int _mediumCorrect;
+	float _mediumMarkPercentage; // how much of mark is for this type of questions
+
 	int _hardCount;
-	int _quizCount;
+	int _hardCorrect;
+	float _hardMarkPercentage; // how much of mark is for this type of questions
 
 	float _wait;
 	bool _endLecture;

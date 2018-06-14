@@ -15,22 +15,31 @@ Lecture& Lecture::initialize()
 	_quizType = eQuizType::Easy;
 	_lectureTime = 90.0;
 	_timePassed = 0;
+
 	_easyCount = 0;
+	_easyCorrect = 0;
+	_easyMarkPercentage = 50.0;
+
 	_mediumCount = 0;
+	_mediumCorrect = 0;
+	_mediumMarkPercentage = 30.0;
+
 	_hardCount = 0;
-	_quizCount = 0;
+	_hardCorrect = 0;
+	_hardMarkPercentage = 20.0;
+
 	generateWait();
 	
 	_endLecture = false;
 
 	TextInfo textinfo;
-	textinfo.horizontalAlign = TextInfo::eHorizontalAlign::Left;
+	textinfo.horizontalAlign = TextInfo::eHorizontalAlign::Right;
 	textinfo.verticalAlign = TextInfo::eVerticalAlign::Top;
 	textinfo.font = &_gameHelper->font;
-	textinfo.characterSize = 5;
+	textinfo.characterSize = 12;
 	textinfo.backgroundColor = sf::Color::Transparent;
-	//_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX, 0));
-	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(0, 0));
+	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX, 0));
+	//_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(0, 0));
 
 	_lectureState = eLectureState::None;
 
@@ -110,16 +119,17 @@ Lecture& Lecture::generateQuiz()
 	{
 	default:
 		generateEasy();
+		_easyCount++;
 		break;
 	case 1:
 		generateMedium();
+		_mediumCount++;
 		break;
 	case 2:
 		generateHard();
+		_hardCount++;
 		break;
 	} // switch
-	_quizCount++;
-	
 
 	if (_correctAnswers.size() > 0)
 		_quizData.reactionOnCorrect = _correctAnswers[std::rand() % _correctAnswers.size()];
@@ -137,9 +147,17 @@ double Lecture::generateTotal()
 {
 	double mark = 0;
 
-	mark += _easyCount / _quizCount * 50.0;
-	mark += _mediumCount / _quizCount * 30.0;
-	mark += _hardCount / _quizCount * 20.0;
+	if (_easyCount > 0)
+		mark += _easyCorrect / _easyCount * _easyMarkPercentage;
+	else mark += _easyMarkPercentage;
+
+	if (_mediumCount > 0)
+		mark += _mediumCorrect / _mediumCount * _mediumMarkPercentage;
+	else mark += _mediumMarkPercentage;
+
+	if (_hardCount > 0)
+		mark += _hardCorrect / _hardCount * _hardMarkPercentage;
+	else mark += _hardMarkPercentage;
 
 	return mark;
 } // generating mark
@@ -155,10 +173,10 @@ Lecture& Lecture::input()
 		if (inp == Quiz::eInput::Correct)
 		{ 
 			if (_quizType == eQuizType::Easy)
-				_easyCount++;
+				_easyCorrect++;
 			else if (_quizType == eQuizType::Medium)
-				_mediumCount++;
-			else _hardCount++;
+				_mediumCorrect++;
+			else _hardCorrect++;
 		} // if
 	} // if
 
@@ -194,6 +212,9 @@ Lecture& Lecture::update(float dt)
 			tm += "0";
 		else tm += std::to_string((int)seconds);
 
+		if (tm == "00:59")
+			_timer = sf::String(tm);
+		else
 		_timer = sf::String(tm);
 	} // if
 
