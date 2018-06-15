@@ -150,18 +150,19 @@ Text& Text::createTexture()
 
 	this->setPosition(_position);
 
-	_renderTexture.create(_size.x, _size.y);
+	_renderTexture.create((int)_size.x, (int)_size.y);
+	//_renderTexture.
 	_renderTexture.clear(_textinfo.backgroundColor);
 
 	_text.setString(_strings[0]);
 	_text.setPosition(0, 0);
-	_text.move(sf::Vector2f(sf::Vector2i(_textinfo.margin - sf::Vector2f(_text.getGlobalBounds().left, _text.getGlobalBounds().top))));
+	_text.move(sf::Vector2f(sf::Vector2i(_textinfo.margin)));
 
 	// horizontal align
 	if (_textinfo.horizontalAlign == TextInfo::eHorizontalAlign::Middle)
-		_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x / 2 - _text.getGlobalBounds().width / 2, _text.getPosition().y)));
+		_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x / 2 - _text.getGlobalBounds().width / 2, _text.getPosition().y + _textinfo.margin.y)));
 	else if (_textinfo.horizontalAlign == TextInfo::eHorizontalAlign::Right)
-		_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x - _text.getGlobalBounds().width, _text.getPosition().y)));
+		_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x - _textinfo.margin.x - _text.getGlobalBounds().width, _text.getPosition().y + _textinfo.margin.y)));
 
 	//_image.
 	_renderTexture.draw(_text);
@@ -173,9 +174,9 @@ Text& Text::createTexture()
 		_text.setString(_strings[i]);
 
 		if (_textinfo.horizontalAlign == TextInfo::eHorizontalAlign::Middle)
-			_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x / 2 -_text.getGlobalBounds().width / 2, _text.getPosition().y)));
+			_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x / 2 - _text.getGlobalBounds().width / 2, _text.getPosition().y + _textinfo.margin.y)));
 		else if (_textinfo.horizontalAlign == TextInfo::eHorizontalAlign::Right)
-			_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x - _text.getGlobalBounds().width, _text.getPosition().y)));
+			_text.setPosition(sf::Vector2f(sf::Vector2i(_size.x - _textinfo.margin.x - _text.getGlobalBounds().width, _text.getPosition().y + _textinfo.margin.y)));
 
 		_renderTexture.draw(_text);
 	} // for

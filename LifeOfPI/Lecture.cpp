@@ -36,9 +36,9 @@ Lecture& Lecture::initialize()
 	textinfo.horizontalAlign = TextInfo::eHorizontalAlign::Right;
 	textinfo.verticalAlign = TextInfo::eVerticalAlign::Top;
 	textinfo.font = &_gameHelper->font;
-	textinfo.characterSize = 12;
-	textinfo.backgroundColor = sf::Color::Transparent;
-	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX, 0));
+	textinfo.characterSize = 5;
+	textinfo.backgroundColor = sf::Color::Red;
+	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX - 3, 3));
 	//_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(0, 0));
 
 	_lectureState = eLectureState::None;
