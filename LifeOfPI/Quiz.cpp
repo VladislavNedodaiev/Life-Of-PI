@@ -95,7 +95,8 @@ Quiz& Quiz::start(QuizQuestionData &quizData)
 
 	if (_quizData != nullptr)
 	{
-		_tictacSound.play();
+		if (_settings->sounds)
+			_tictacSound.play();
 
 		_initialTime = _quizData->duration;
 		_waitTime = _quizData->waitDuration;

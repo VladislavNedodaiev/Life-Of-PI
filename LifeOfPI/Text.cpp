@@ -90,8 +90,8 @@ Text& Text::operator=(const sf::String &string)
 
 	int size = string.getSize();
 
-	int maxWidth = 0;
-	int height = 0;
+	float maxWidth = 0;
+	float height = 0;
 
 	while (endPos < size)
 	{
@@ -151,6 +151,7 @@ Text& Text::createTexture()
 	this->setPosition(_position);
 
 	_renderTexture.create((int)_size.x, (int)_size.y);
+	
 	//_renderTexture.
 	_renderTexture.clear(_textinfo.backgroundColor);
 
@@ -182,7 +183,7 @@ Text& Text::createTexture()
 	} // for
 
 	_renderTexture.display();
-	_box.setTexture(&_renderTexture.getTexture());
+	_box.setTexture(&_renderTexture.getTexture(), true);
 
 	return *this;
 } // creating texture

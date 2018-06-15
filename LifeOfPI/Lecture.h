@@ -17,6 +17,7 @@ protected:
 	sf::SoundBuffer _correctAnswerBuffer;
 	sf::SoundBuffer _incorrectAnswerBuffer;
 	sf::SoundBuffer _tictacBuffer;
+	sf::SoundBuffer _ringBuffer;
 
 	SpriteSheet _backgroundSheet;
 	SpriteSheet _foregroundSheet;
@@ -39,6 +40,7 @@ protected:
 	std::vector <sf::String> _finalWords;
 
 	sf::Music _backgroundMusic;
+	sf::Sound _ringSound;
 
 	// Quizing
 	enum eQuizType

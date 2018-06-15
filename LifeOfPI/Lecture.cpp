@@ -18,7 +18,7 @@ Lecture& Lecture::initialize()
 
 	_easyCount = 0;
 	_easyCorrect = 0;
-	_easyMarkPercentage = 50.0;
+	_easyMarkPercentage = 30.0;
 
 	_mediumCount = 0;
 	_mediumCorrect = 0;
@@ -26,7 +26,7 @@ Lecture& Lecture::initialize()
 
 	_hardCount = 0;
 	_hardCorrect = 0;
-	_hardMarkPercentage = 20.0;
+	_hardMarkPercentage = 40.0;
 
 	generateWait();
 	
@@ -37,9 +37,8 @@ Lecture& Lecture::initialize()
 	textinfo.verticalAlign = TextInfo::eVerticalAlign::Top;
 	textinfo.font = &_gameHelper->font;
 	textinfo.characterSize = 5;
-	textinfo.backgroundColor = sf::Color::Red;
-	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX - 3, 3));
-	//_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(0, 0));
+	textinfo.backgroundColor = sf::Color::Transparent;
+	_timer.setTextInfo(textinfo).setPosition(sf::Vector2f(_gameHelper->settings.VIEW_SIZEX, 0));
 
 	_lectureState = eLectureState::None;
 
@@ -50,14 +49,18 @@ Lecture& Lecture::initialize()
 		_incorrectAnswerBuffer,
 		_tictacBuffer);
 
+	_ringSound.setBuffer(_ringBuffer);
+
 	return *this;
 } // initializing
 
 Lecture& Lecture::loadContent()
 {
+
 	_correctAnswerBuffer.loadFromFile("Data/Levels/CorrectAnswer.wav");
 	_incorrectAnswerBuffer.loadFromFile("Data/Levels/IncorrectAnswer.wav");
 	_tictacBuffer.loadFromFile("Data/Levels/Tic-Tac.wav");
+	_ringBuffer.loadFromFile("Data/Levels/Ringing.wav");
 
 	_quizSheet.load("Data/Levels/QuizSheet.png");
 
@@ -89,11 +92,11 @@ Lecture& Lecture::generateWait()
 	{
 	default:
 		if ((int)((_timePassed + 5.0) / _lectureTime * 3.0) != icase)
-			_wait = _lectureTime * 3.0 - _timePassed;
+			_wait = _lectureTime / 3.0 - _timePassed;
 		else _wait = 5.0;
 		break;
 	case 1:
-		if ((int)((_timePassed + 5.0) / _lectureTime * 3.0) != icase)
+		if ((int)((_timePassed + 3.0) / _lectureTime * 3.0) != icase)
 			_wait = _lectureTime / 3.0 * 2.0 - _timePassed;
 		else _wait = 3.0;
 		break;
@@ -119,14 +122,17 @@ Lecture& Lecture::generateQuiz()
 	{
 	default:
 		generateEasy();
+		_quizType = eQuizType::Easy;
 		_easyCount++;
 		break;
 	case 1:
 		generateMedium();
+		_quizType = eQuizType::Medium;
 		_mediumCount++;
 		break;
 	case 2:
 		generateHard();
+		_quizType = eQuizType::Hard;
 		_hardCount++;
 		break;
 	} // switch
@@ -140,6 +146,12 @@ Lecture& Lecture::generateQuiz()
 
 	_quiz->start(_quizData);
 
+	if (_timePassed >= _lectureTime / 3.0 * 2)
+		_backgroundMusic.setPitch(1.4);
+	else if (_timePassed >= _lectureTime / 3.0)
+		_backgroundMusic.setPitch(1.1);
+	_backgroundMusic.play();
+
 	return *this;
 } // generating quiz
 
@@ -148,15 +160,15 @@ double Lecture::generateTotal()
 	double mark = 0;
 
 	if (_easyCount > 0)
-		mark += _easyCorrect / _easyCount * _easyMarkPercentage;
+		mark += (float)_easyCorrect/ _easyCount * _easyMarkPercentage;
 	else mark += _easyMarkPercentage;
 
 	if (_mediumCount > 0)
-		mark += _mediumCorrect / _mediumCount * _mediumMarkPercentage;
+		mark += (float)_mediumCorrect / _mediumCount * _mediumMarkPercentage;
 	else mark += _mediumMarkPercentage;
 
 	if (_hardCount > 0)
-		mark += _hardCorrect / _hardCount * _hardMarkPercentage;
+		mark += (float)_hardCorrect / _hardCount * _hardMarkPercentage;
 	else mark += _hardMarkPercentage;
 
 	return mark;
@@ -212,9 +224,6 @@ Lecture& Lecture::update(float dt)
 			tm += "0";
 		else tm += std::to_string((int)seconds);
 
-		if (tm == "00:59")
-			_timer = sf::String(tm);
-		else
 		_timer = sf::String(tm);
 	} // if
 
@@ -232,6 +241,7 @@ Lecture& Lecture::update(float dt)
 			} // if
 			else if (_quiz->update(dt) == Quiz::eUpdateResult::Closed)
 			{
+				_backgroundMusic.pause();
 				_lecturer->setState(Lecturer::eLecturerState::Idle);
 				generateWait();
 			} // else if
@@ -245,7 +255,13 @@ Lecture& Lecture::update(float dt)
 				_quiz->getQuizState() == Quiz::eQuizState::None ||
 				_quiz->update(dt) == Quiz::eUpdateResult::Closed)
 			{
+				if (_ringSound.getBuffer() != nullptr)
+					_ringSound.play();
+				
+				_backgroundMusic.pause();
+				_lecturer->setState(Lecturer::eLecturerState::Idle);
 				_wait = 5.0;
+				_endLecture = true;
 				if (_lecturer != nullptr && _finalWords.size() > 0)
 					_lecturer->say(_finalWords[std::rand() % _finalWords.size()], 3.0);
 			} // if
@@ -254,7 +270,7 @@ Lecture& Lecture::update(float dt)
 		{
 			_wait -= dt;
 			if (_wait <= 0.0)
-				toDelete = true;
+				_lecturer->say(L"Ваш результат: " + std::to_wstring((int)generateTotal()) + L"\nНатисніть Esc, щоб вийти", 3.0);//toDelete = true;
 		} // else
 	} // else
 	if (_lecturer != nullptr)
