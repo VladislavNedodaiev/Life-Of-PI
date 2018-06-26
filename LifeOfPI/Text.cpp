@@ -83,6 +83,10 @@ TextInfo Text::getTextInfo()
 
 Text& Text::operator=(const sf::String &string)
 {
+	sf::Clock cl;
+	sf::Time time;
+
+	cl.restart();
 	_strings.clear();
 
 	int startPos = 0;
@@ -125,6 +129,10 @@ Text& Text::operator=(const sf::String &string)
 			height += _text.getGlobalBounds().height + _textinfo.lineSpacing;
 		}
 	} // if
+	time = cl.restart();
+
+	std::cout << "\nText: " << string.getData();
+	std::cout << "\nTime spent on prepare: " << time.asSeconds();
 
 	if (_textinfo.font != nullptr)
 	{
@@ -132,7 +140,7 @@ Text& Text::operator=(const sf::String &string)
 		_box.setSize(_size);
 		createTexture();
 	} // if
-
+	
 	return *this;
 } // setting string
 
@@ -145,14 +153,32 @@ Text& Text::render(sf::RenderTarget &target)
 
 Text& Text::createTexture()
 {
+	sf::Clock cl;
+	sf::Time time;
+	cl.restart();
+
 	if (!_strings.size() || _textinfo.font == nullptr)
 		return *this;
 
 	this->setPosition(_position);
 
-	_renderTexture.create((int)_size.x, (int)_size.y);
-	
-	//_renderTexture.
+	// made for optimizing, cause sf::RenderTexture::create(...) requires lots of time
+	sf::Vector2u rsize = _renderTexture.getSize();
+	if (rsize.x < _size.x)
+	{
+		rsize.x = _size.x;
+		if (rsize.y < _size.y)
+			rsize.y = _size.y;
+		_renderTexture.create(rsize.x, rsize.y);
+	} // if (rsize.x < _size.x)
+	else if (rsize.y < _size.y)
+	{
+		rsize.y = _size.y;
+		if (rsize.x < _size.x)
+			rsize.x = _size.x;
+		_renderTexture.create(rsize.x, rsize.y);
+	} // else if (rsize.y < _size.y)
+
 	_renderTexture.clear(_textinfo.backgroundColor);
 
 	_text.setString(_strings[0]);

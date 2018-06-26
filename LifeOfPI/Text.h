@@ -3,6 +3,8 @@
 #include <vector>
 #include "TextInfo.h"
 
+#include <iostream>
+
 class Text
 {
 protected:

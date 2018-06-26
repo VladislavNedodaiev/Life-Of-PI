@@ -21,6 +21,7 @@ HighMath& HighMath::initialize()
 	_foreground = new GameObject(_foregroundSheet.getSheet());
 	_foreground->setPosition(0, _gameHelper->settings.VIEW_SIZEY - _foreground->getSize().y);
 	_lecturer = new Litvinog(_lecturerSheet.getSheet(), 32, 163, &_gameHelper->font);
+	_lecturer->say(sf::String(L"LITVINOG"), 5);
 
 	_backgroundMusic.setVolume(70);
 
@@ -184,80 +185,53 @@ HighMath& HighMath::generateMedium()
 	int num;
 	wchar_t operationA, operationB;
 	int result;
-	switch (std::rand() % 2)
+
+	num = 0;
+	// A
+	switch (std::rand() % 3)
 	{
 	default:
-		result = std::rand() % 10 + 2;
-		num = result * result;
-		switch (std::rand() % 3)
-		{
-		default:
-			operationA = '+';
-			x = std::rand() % (num - 2) + 1;
-			y = num - x;
-			break;
-		case 1:
-			operationA = '-';
-			x = std::rand() % num + num + 1;
-			y = x - num;
-			break;
-		case 2:
-			operationA = '/';
-			x = (std::rand() % (900 / num) + 1) * num;
-			y = x / num;
-			break;
-		} // switch
-		_quizData.question = L"Порахуйте SQRT(" + std::to_wstring(x) + operationA + std::to_wstring(y) + L") = ?";
+		operationA = '+';
+		x = std::rand() % 45 + 5;
+		y = std::rand() % 45 + 5;
+		num = x + y;
 		break;
 	case 1:
-		num = 0;
-		// A
-		switch (std::rand() % 3)
-		{
-		default:
-			operationA = '+';
-			x = std::rand() % 45 + 5;
-			y = std::rand() % 45 + 5;
-			num = x + y;
-			break;
-		case 1:
-			operationA = '-';
-			x = std::rand() % 45 + 5;
-			y = std::rand() % 45 + 5;
-			num = x - y;
-			break;
-		case 2:
-			operationA = 'x';
-			x = std::rand() % 45 + 5;
-			y = std::rand() % 8 + 2;
-			num = x * y;
-			break;
-		} // switch
-
-		// B
-		switch (std::rand() % 3)
-		{
-		default:
-			operationB = '+';
-			z = std::rand() % 45 + 5;
-			result = num + z;
-			break;
-		case 1:
-			operationB = '-';
-			z = std::rand() % 45 + 5;
-			result = num - z;
-			break;
-		case 2:
-			operationB = 'x';
-			z = std::rand() % 8 + 2;
-			if (operationA == 'x')
-				result = x * y * z;
-			else result = x + y * z;
-			break;
-		} // switch
-		_quizData.question = L"Порахуйте " + std::to_wstring(x) + operationA + std::to_wstring(y) + operationB + std::to_wstring(z) + L" = ?";
+		operationA = '-';
+		x = std::rand() % 45 + 5;
+		y = std::rand() % 45 + 5;
+		num = x - y;
+		break;
+	case 2:
+		operationA = 'x';
+		x = std::rand() % 45 + 5;
+		y = std::rand() % 8 + 2;
+		num = x * y;
 		break;
 	} // switch
+
+	// B
+	switch (std::rand() % 3)
+	{
+	default:
+		operationB = '+';
+		z = std::rand() % 45 + 5;
+		result = num + z;
+		break;
+	case 1:
+		operationB = '-';
+		z = std::rand() % 45 + 5;
+		result = num - z;
+		break;
+	case 2:
+		operationB = 'x';
+		z = std::rand() % 8 + 2;
+		if (operationA == 'x')
+			result = x * y * z;
+		else result = x + y * z;
+		break;
+	} // switch
+	_quizData.question = L"Порахуйте " + std::to_wstring(x) + operationA + std::to_wstring(y) + operationB + std::to_wstring(z) + L" = ?";
 
 	if (_easyCount + 3 < 8)
 		_quizData.duration = 8 - _mediumCount;
@@ -280,7 +254,7 @@ HighMath& HighMath::generateHard()
 	wchar_t operationA, operationB;
 	int result;
 	
-	switch (std::rand() % 3)
+	switch (std::rand() % 2)
 	{
 	default:
 		switch (std::rand() % 4)
@@ -313,24 +287,6 @@ HighMath& HighMath::generateHard()
 		_quizData.question = L"Порахуйте " + std::to_wstring(x) + operationA + std::to_wstring(y) + L" = ?";
 		break;
 	case 1:
-		result = std::rand() % 30 + 2;
-		num = result * result;
-		switch (std::rand() % 2)
-		{
-		default:
-			operationA = '+';
-			x = std::rand() % (num - 2) + 1;
-			y = num - x;
-			break;
-		case 1:
-			operationA = '-';
-			x = std::rand() % num + num + 1;
-			y = x - num;
-			break;
-		} // switch
-		_quizData.question = L"Порахуйте SQRT(" + std::to_wstring(x) + operationA + std::to_wstring(y) + L") = ?";
-		break;
-	case 2:
 		num = 0;
 		// A
 		switch (std::rand() % 3)
